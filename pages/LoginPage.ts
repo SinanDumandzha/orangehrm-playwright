@@ -5,19 +5,21 @@ export class LoginPage{
     readonly userNameInput: Locator;
     readonly passwordInput: Locator;
     readonly loginButton: Locator;
+    readonly invalidCredsErrorMessage: Locator;
 
     constructor(page: Page){
         this.page = page;
         this.userNameInput = page.getByRole('textbox', { name: 'Username' });
         this.passwordInput = page.getByRole('textbox', { name: 'Password' });
         this.loginButton = page.getByRole('button', { name: 'Login' });
+        this.invalidCredsErrorMessage = page.getByRole('alert');
     }
 
     /**
      * Open URL 
      */
     async gotoOrangeHrm(){
-        await this.page.goto('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login');
+        await this.page.goto(`${process.env.BASE_URL}/web/index.php/auth/login`);
     }
 
     /**

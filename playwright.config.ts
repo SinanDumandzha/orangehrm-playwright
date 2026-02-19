@@ -29,6 +29,10 @@ export default defineConfig({
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [['html',{open:'always'}]],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
+  timeout: 90000,
+  expect: {
+    timeout: 30000
+  },
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
     // baseURL: 'http://localhost:3000',
@@ -42,18 +46,31 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
+      name:'Setup',
+      testMatch: 'global.setup.ts'
+    },
+    {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      dependencies: ['Setup'],
+      use: { ...devices['Desktop Chrome'],
+        storageState: './playwright/.auth/auth.json'
+       },
     },
 
     {
       name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
+      dependencies: ['Setup'],
+      use: { ...devices['Desktop Firefox'],
+        storageState: './playwright/.auth/auth.json'
+       },
     },
 
     {
       name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
+      dependencies: ['Setup'],
+      use: { ...devices['Desktop Safari'],
+        storageState: './playwright/.auth/auth.json'
+       },
     },
 
     /* Test against mobile viewports. */
