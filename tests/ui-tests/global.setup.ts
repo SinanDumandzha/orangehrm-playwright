@@ -1,5 +1,5 @@
 import { expect } from '@playwright/test';
-import { test } from '../fixtures/common-fixture';
+import { test } from '../../fixtures/common-fixture';
 
 test('Global Setup for Auto Login', async({page, loginPage, dashboardPage, commonUtils})=> {
     const decryptedUsername = commonUtils.decryptData(process.env.USER_NAME!);

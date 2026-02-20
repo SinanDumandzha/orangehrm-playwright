@@ -21,9 +21,8 @@ export default class CommonUtils{
      * @param data 
      * @returns 
      */
-    public encryptData(data:string){
+    public encryptData(data: string){
         const encryptedData = cryptoJs.AES.encrypt(data, this.secretKey).toString();
-        console.log(encryptedData);
         return encryptedData;
     }
 
@@ -32,12 +31,11 @@ export default class CommonUtils{
      * @param encData
      * @returns 
      */
-    public decryptData(encData:string){
+    public decryptData(encData: string){
         const decryptedData = cryptoJs.AES.decrypt(encData, this.secretKey).toString(cryptoJs.enc.Utf8);
         return decryptedData;
     }
 }
-
 
 export function getRandomNumber(min: number, max: number): number {
     return Math.floor(min + Math.random() * (max - min + 1));
