@@ -9,7 +9,7 @@ export class LeftNavPage{
     constructor(page: Page){
         this.page = page;
         this.pimLink = page.getByRole('link', { name: 'PIM' });
-        this.brandLogo = page.locator('.oxd-brand img');
+        this.brandLogo = page.getByRole('link', { name: 'client brand banner' });
         this.leftNavMenu = page.locator('.oxd-sidepanel-body');
     }
 

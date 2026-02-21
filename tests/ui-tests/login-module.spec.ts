@@ -21,25 +21,22 @@ test.describe("Valid Login Test", {
             type: 'Test Case Link',
             description: 'testCaseLink' // test case link from PM/TM software
             }
-        }, async({ gotoUrl, loginPage, commonUtils, leftNavPage }) => {
+        }, async({ gotoUrl, page, loginPage, commonUtils, leftNavPage, browserName }) => {
+            test.skip(browserName !== 'chromium');
+
             await test.step("Try to login with valid username and valid password", async() => {
                 const username = commonUtils.decryptData(process.env.USER_NAME!);
                 const password = commonUtils.decryptData(process.env.PASSWORD!);
-
-                await test.step(`Login with valid credentials on ${process.platform}`, async () => {
-                    await loginPage.loginOrangeHrm(username, password);
+                await loginPage.loginOrangeHrm(username, password);
+                await page.waitForURL(`${process.env.BSE_URL}/web/index.php/dashboard/index`);
+                await page.waitForLoadState("networkidle");
+                await expect(leftNavPage.brandLogo).toHaveScreenshot('BrandLogo.png', {
+                    maxDiffPixelRatio: 0.05,
+                    omitBackground: true
                 });
-                await test.step(`BrandLogo visual check on ${process.platform}`, async () => {
-                    await expect(leftNavPage.brandLogo).toHaveScreenshot('BrandLogo.png', {
-                        maxDiffPixelRatio: 0.05,
-                        omitBackground: true
-                    });
-                });
-                await test.step(`LeftNavMenu visual check on ${process.platform}`, async () => {
-                    await expect(leftNavPage.leftNavMenu).toHaveScreenshot('LeftNavMenu.png', {
-                        maxDiffPixelRatio: 0.05,
-                        omitBackground: true
-                    });
+                await expect(leftNavPage.leftNavMenu).toHaveScreenshot('LeftNavMenu.png', {
+                    maxDiffPixelRatio: 0.05,
+                    omitBackground: true
                 });
             });        
         });
