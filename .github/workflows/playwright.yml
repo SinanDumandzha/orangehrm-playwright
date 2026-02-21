@@ -27,9 +27,11 @@ jobs:
       run: npx playwright install --with-deps
     - name: Generate Linux snapshots
       run: npx playwright test --update-snapshots
-    - name: Upload snapshots
-      if: always()
-      uses: actions/upload-artifact@v4
+    - name: Run Playwright tests
+      run: npx playwright test
+    - uses: actions/upload-artifact@v4
+      if: ${{ !cancelled() }}
       with:
-        name: linux-snapshots
-        path: tests/**/**-snapshots/**
+        name: playwright-report
+        path: playwright-report/
+        retention-days: 30
