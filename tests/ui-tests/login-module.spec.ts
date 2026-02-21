@@ -26,8 +26,14 @@ test.describe("Valid Login Test", {
                 const username = commonUtils.decryptData(process.env.USER_NAME!);
                 const password = commonUtils.decryptData(process.env.PASSWORD!);
                 await loginPage.loginOrangeHrm(username, password);
-                await expect(leftNavPage.brandLogo).toHaveScreenshot('BrandLogo.png');
-                await expect(leftNavPage.leftNavMenu).toHaveScreenshot('LeftNavMenu.png');
+                await expect(leftNavPage.brandLogo).toHaveScreenshot('BrandLogo.png', {
+                    maxDiffPixels: 0.05,
+                    omitBackground: true
+                });
+                await expect(leftNavPage.leftNavMenu).toHaveScreenshot('LeftNavMenu.png', {
+                    maxDiffPixels: 0.05,
+                    omitBackground: true
+                });
             });        
         });
     }

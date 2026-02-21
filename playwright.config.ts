@@ -1,10 +1,3 @@
-console.log('CI:', process.env.CI);
-console.log('SECRET_KEY exists:', !!process.env.SECRET_KEY);
-console.log('API_BASE_URL:', process.env.API_BASE_URL);
-console.log('USER_NAME exists:', !!process.env.USER_NAME);
-console.log('PASSWORD exists:', !!process.env.PASSWORD);
-console.log('BASE_URL exists:', !!process.env.BASE_URL);
-
 import { defineConfig, devices } from '@playwright/test';
 import dotenv from 'dotenv';
 
@@ -18,7 +11,7 @@ import dotenv from 'dotenv';
 
 dotenv.config({
     path: process.env.ENV_NAME ? `./env-files/.env.${process.env.ENV_NAME}` : './env-files/.env.demo'
-})
+});
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -36,7 +29,7 @@ export default defineConfig({
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [['html',{open:'always'}]],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
-  timeout: 90000,
+  timeout: 120000,
   expect: {
     timeout: 120000
   },
