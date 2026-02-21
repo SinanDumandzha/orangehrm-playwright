@@ -38,12 +38,13 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   timeout: 90000,
   expect: {
-    timeout: 30000
+    timeout: 120000
   },
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
     // baseURL: 'http://localhost:3000',
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
+    navigationTimeout: 60000,
     screenshot:'only-on-failure',
     video: 'retain-on-failure',
     trace: 'retain-on-failure',

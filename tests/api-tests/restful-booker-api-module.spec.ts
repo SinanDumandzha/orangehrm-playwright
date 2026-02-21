@@ -29,12 +29,22 @@ test("[Restful-Booker > Booking] Verify that the user is able to fetch booking d
         }
     },
     async({ request }) => {
-        const response = await request.get(`${apiPathData.booking_path}/${bookerApiModuleData.booking_id}`);
-        const bookingJsonResponse = await response.json();
-        expect(response.status()).toBe(200);
-        expect(response.statusText()).toBe('OK');
-        expect(bookingJsonResponse).not.toBeNull();
-        expect(bookingJsonResponse.firstname).toEqual(bookerApiModuleData.firstname);
+        const createResponse = await request.post(apiPathData.booking_path, {
+            data: bookerApiModuleData.create_booking_body
+            }
+        );
+        expect(createResponse.status()).toBe(200);
+
+        const createJson = await createResponse.json();
+        const bookingId = createJson.bookingid;
+        const getResponse = await request.get(
+            `${apiPathData.booking_path}/${bookingId}`
+        );
+        const bookingJson = await getResponse.json();
+        expect(getResponse.status()).toBe(200);
+        expect(getResponse.statusText()).toBe('OK');
+        expect(bookingJson.firstname).toBe(bookerApiModuleData.create_booking_body.firstname);
+        expect(bookingJson).not.toBeNull();
     }
 );
 
