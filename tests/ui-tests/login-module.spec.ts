@@ -25,14 +25,21 @@ test.describe("Valid Login Test", {
             await test.step("Try to login with valid username and valid password", async() => {
                 const username = commonUtils.decryptData(process.env.USER_NAME!);
                 const password = commonUtils.decryptData(process.env.PASSWORD!);
-                await loginPage.loginOrangeHrm(username, password);
-                await expect(leftNavPage.brandLogo).toHaveScreenshot('BrandLogo.png', {
-                    maxDiffPixels: 0.05,
-                    omitBackground: true
+
+                await test.step(`Login with valid credentials on ${process.platform}`, async () => {
+                    await loginPage.loginOrangeHrm(username, password);
                 });
-                await expect(leftNavPage.leftNavMenu).toHaveScreenshot('LeftNavMenu.png', {
-                    maxDiffPixels: 0.05,
-                    omitBackground: true
+                await test.step(`BrandLogo visual check on ${process.platform}`, async () => {
+                    await expect(leftNavPage.brandLogo).toHaveScreenshot('BrandLogo.png', {
+                        maxDiffPixelRatio: 0.05,
+                        omitBackground: true
+                    });
+                });
+                await test.step(`LeftNavMenu visual check on ${process.platform}`, async () => {
+                    await expect(leftNavPage.leftNavMenu).toHaveScreenshot('LeftNavMenu.png', {
+                        maxDiffPixelRatio: 0.05,
+                        omitBackground: true
+                    });
                 });
             });        
         });
