@@ -1,3 +1,7 @@
+console.log('CI:', process.env.CI);
+console.log('SECRET_KEY exists:', !!process.env.SECRET_KEY);
+console.log('API_BASE_URL:', process.env.API_BASE_URL);
+
 import { defineConfig, devices } from '@playwright/test';
 import dotenv from 'dotenv';
 
