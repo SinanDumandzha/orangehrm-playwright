@@ -12,4 +12,4 @@ test('Global Setup for Auto Login', async({page, loginPage, dashboardPage, commo
     await page.context().storageState({
         path: './playwright/.auth/auth.json'
     })
-})
+});
