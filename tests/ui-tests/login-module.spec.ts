@@ -29,7 +29,8 @@ test.describe("Valid Login Test", {
                 const password = commonUtils.decryptData(process.env.PASSWORD!);
                 await loginPage.loginOrangeHrm(username, password);
                 await page.waitForURL(`${process.env.BASE_URL}/web/index.php/dashboard/index`);
-                await page.waitForLoadState("networkidle");
+                await leftNavPage.waitForVisible();
+
                 await expect(leftNavPage.brandLogo).toHaveScreenshot('BrandLogo.png', {
                     maxDiffPixelRatio: 0.05,
                     omitBackground: true

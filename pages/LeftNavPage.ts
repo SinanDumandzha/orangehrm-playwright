@@ -22,7 +22,7 @@ export class LeftNavPage{
     }
 
     async waitForVisible(): Promise<void> {
-        await expect(this.sidebar).toBeVisible();
+        await expect(this.sidebar).toBeVisible({ timeout: 15000 });
     }
 
     async getWidth(): Promise<number> {

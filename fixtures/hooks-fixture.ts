@@ -18,7 +18,6 @@ export const test = baseTest.extend<HooksFixtureType>({
     }, 
     leftNavPage: async ({ page }, use) => {
         const leftNavPage = new LeftNavPage(page);
-        await leftNavPage.waitForVisible();
         await use(leftNavPage);
     }
 });
