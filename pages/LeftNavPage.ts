@@ -70,6 +70,7 @@ export class LeftNavPage{
      * Open PIM module
      */
     async openPimModule(): Promise<void> {
+        await expect(this.pimLink).toBeVisible({ timeout: 10000 });
         await this.pimLink.click();
     }
 }

@@ -1,5 +1,5 @@
 import { test, expect } from '../../fixtures/hooks-fixture';
-import loginModuleData from '../../data/ui-data/login-module-data.json';
+import {wrong_username, wrong_password, invalid_creds_error_message} from '../../data/ui-data/login-module-data.json';
 
 test.use({storageState: {
     cookies: [],
@@ -61,8 +61,8 @@ test.describe("Invalid Login Test", {
     }, async({ gotoUrl, loginPage, commonUtils }) => {
         await test.step("Try to login with invalid username", async() => {
             const password = commonUtils.decryptData(process.env.PASSWORD!);
-            await loginPage.loginOrangeHrm(loginModuleData.wrong_username, password);
-            await expect(loginPage.invalidCredsErrorMessage).toHaveText(loginModuleData.invalid_creds_error_message);
+            await loginPage.loginOrangeHrm(wrong_username, password);
+            await expect(loginPage.invalidCredsErrorMessage).toHaveText(invalid_creds_error_message);
             await expect(loginPage.userNameInput).toBeVisible();
         });    
     });
@@ -76,8 +76,8 @@ test.describe("Invalid Login Test", {
         }, async({ gotoUrl, loginPage, commonUtils }) => {
             await test.step("Try to login with invalid password", async() => {
                 const username = commonUtils.decryptData(process.env.USER_NAME!);
-                await loginPage.loginOrangeHrm(username, loginModuleData.wrong_password);
-                await expect(loginPage.invalidCredsErrorMessage).toHaveText(loginModuleData.invalid_creds_error_message);
+                await loginPage.loginOrangeHrm(username, wrong_password);
+                await expect(loginPage.invalidCredsErrorMessage).toHaveText(invalid_creds_error_message);
                 await expect(loginPage.userNameInput).toBeVisible();
             });      
         });
@@ -90,8 +90,8 @@ test.describe("Invalid Login Test", {
             }
         }, async({ gotoUrl, loginPage }) => {
             await test.step("Try to login with invalid username and invalid password", async() => {
-                await loginPage.loginOrangeHrm(loginModuleData.wrong_username, loginModuleData.wrong_password);
-                await expect(loginPage.invalidCredsErrorMessage).toHaveText(loginModuleData.invalid_creds_error_message);
+                await loginPage.loginOrangeHrm(wrong_username, wrong_password);
+                await expect(loginPage.invalidCredsErrorMessage).toHaveText(invalid_creds_error_message);
                 await expect(loginPage.userNameInput).toBeVisible();
             });      
         });

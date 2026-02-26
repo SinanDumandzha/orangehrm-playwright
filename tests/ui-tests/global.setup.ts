@@ -11,5 +11,5 @@ test('Global Setup for Auto Login', async({page, loginPage, dashboardPage, commo
     await expect(dashboardPage.dashboardTitleText).toHaveText('Dashboard');
     await page.context().storageState({
         path: './playwright/.auth/auth.json'
-    })
+    });
 });
