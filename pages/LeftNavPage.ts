@@ -2,19 +2,23 @@ import { Locator, Page, expect } from "@playwright/test";
 
 export class LeftNavPage{
     readonly page: Page;
-    readonly pimLink: Locator;
+    readonly pimMenuItem: Locator;
     readonly brandLogo: Locator;
     readonly sidebar: Locator;
     readonly toggleButton: Locator;
     readonly leftNavMenu: Locator;
+    readonly searchInputField: Locator;
+    readonly performanceMenuItem: Locator;
 
     constructor(page: Page){
         this.page = page;
-        this.pimLink = page.getByRole('link', { name: 'PIM' });
+        this.pimMenuItem = page.getByRole('link', { name: 'PIM' });
         this.brandLogo = page.getByRole('link', { name: 'client brand banner' });
         this.sidebar = page.locator('.oxd-sidepanel');
         this.toggleButton = page.locator('.oxd-main-menu-search button.oxd-icon-button');
         this.leftNavMenu = page.locator('.oxd-sidepanel-body');
+        this.searchInputField = page.getByRole('textbox', { name: 'Search' });
+        this.performanceMenuItem = page.getByRole('link', { name: 'Performance' })
     }
 
     async toggle(): Promise<void> {
@@ -70,7 +74,7 @@ export class LeftNavPage{
      * Open PIM module
      */
     async openPimModule(): Promise<void> {
-        await expect(this.pimLink).toBeVisible({ timeout: 10000 });
-        await this.pimLink.click();
+        await expect(this.pimMenuItem).toBeVisible({ timeout: 10000 });
+        await this.pimMenuItem.click();
     }
 }
