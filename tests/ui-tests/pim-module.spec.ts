@@ -51,3 +51,34 @@ test.describe('[PIM] Verify that new employees are successfully added under the 
         }
     }
 );
+
+test.describe('[PIM] - Success Toast Validation', 
+    { 
+        tag: ['@UI', '@UAT'], 
+        annotation: {   
+            type: 'Test Case Link', 
+            description: 'testCaseLink' 
+        } 
+    }, 
+    () => {
+        test('Should display green success toast after saving employee.', async ({
+            gotoUrl,
+            leftNavPage,
+            pimPage,
+            toast,
+        }) => {
+            const { firstName, middleName, lastName } = employees[0];
+
+            await test.step('Open PIM module.', async () => {
+                await leftNavPage.openPimModule();
+            });
+
+            await test.step('Add employee.', async () => {
+                const randomUserId = getRandomNumber(1000, 99999);
+                await pimPage.addEmployee(firstName, middleName, lastName, randomUserId);
+                await toast.expectSuccess('Successfully Saved');
+                await toast.waitForDisappear();
+            })
+        });
+    }
+);

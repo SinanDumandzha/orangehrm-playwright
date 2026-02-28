@@ -4,6 +4,7 @@ import { DashboardPage } from '../pages/DashboardPage';
 import { UserPage } from '../pages/UserPage';
 import { LeftNavPage } from '../pages/LeftNavPage';
 import { PimPage } from '../pages/PimPage';
+import { Toast } from '../pages/components/Toast';
 
 type PomFixturesType = {
     loginPage: LoginPage;
@@ -11,6 +12,7 @@ type PomFixturesType = {
     userPage: UserPage;
     leftNavPage: LeftNavPage;
     pimPage: PimPage;
+    toast: Toast;
 }
 
 export const test = baseTest.extend<PomFixturesType>({
@@ -28,5 +30,8 @@ export const test = baseTest.extend<PomFixturesType>({
     },
     pimPage: async({page}, use) => {
         await use(new PimPage(page));
+    },
+    toast: async ({ page }, use) => {
+        await use(new Toast(page));
     }
 });

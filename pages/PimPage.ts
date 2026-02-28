@@ -2,7 +2,7 @@ import { Locator, Page } from "@playwright/test";
 
 export class PimPage{
     readonly page: Page;
-    readonly addPimButton: Locator;
+    readonly addButton: Locator;
     readonly firstNameTextBox: Locator;
     readonly middleNameTextBox: Locator;
     readonly lastNameTextBox: Locator;
@@ -12,7 +12,7 @@ export class PimPage{
 
     constructor(page: Page){
         this.page= page;
-        this.addPimButton = page.getByRole('button', { name: ' Add' });
+        this.addButton = page.getByRole('button', { name: ' Add' });
         this.firstNameTextBox = page.getByRole('textbox', { name: 'First Name' });
         this.middleNameTextBox = page.getByRole('textbox', { name: 'Middle Name' });
         this.lastNameTextBox = page.getByRole('textbox', { name: 'Last Name' });
@@ -29,7 +29,7 @@ export class PimPage{
      * @param employeeId 
      */
     async addEmployee(firstName: string, middleName:string, lastName: string, employeeId: number){
-        await this.addPimButton.click();
+        await this.addButton.click();
         await this.firstNameTextBox.fill(firstName);
         await this.middleNameTextBox.fill(middleName);
         await this.lastNameTextBox.fill(lastName);
