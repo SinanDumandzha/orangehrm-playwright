@@ -1,5 +1,9 @@
 # Playwright Test Automation Framework – Training Project
 
+<img width="1589" height="777" alt="orangeHRM" src="https://github.com/user-attachments/assets/c1cd1f5f-a11a-4aae-bd1c-73b727ef214f" />
+
+---
+
 ![Playwright](https://img.shields.io/badge/Playwright-2EAD33?style=for-the-badge&logo=playwright&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
 ![NodeJS](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)
