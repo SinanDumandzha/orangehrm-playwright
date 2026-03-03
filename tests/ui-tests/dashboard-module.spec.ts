@@ -1,4 +1,11 @@
 import { test, expect } from '../../fixtures/hooks-fixture';
+import rawWidgetsData from '../../data/ui-data/dashboard-module-data.json';
+
+type DashboardData = {
+    dashboard: {
+        expectedWidgetTitles: string[];
+    };
+};
 
 test.describe('[DASHBOARD] Verify that Help page open in a new tab when "?" button clicked.', 
     { 
@@ -25,3 +32,25 @@ test.describe('[DASHBOARD] Verify that Help page open in a new tab when "?" butt
         });
     }
 );
+
+test.describe('[DASHBOARD] Verify that all widgets at dashboard screen displayed.', 
+    { 
+        tag: ['@UI', '@UAT'], 
+        annotation: {   
+            type: 'Test Case Link', 
+            description: 'testCaseLink' 
+        } 
+    },  
+    () => {
+    test('Should display correct widget titles (strict order).', async ({ gotoUrl, dashboardPage }) => {
+        await dashboardPage.waitForLoaded();
+
+        const dashboardData = rawWidgetsData as DashboardData;
+        const expectedTitles = dashboardData.dashboard.expectedWidgetTitles;
+        const actualTitles = await dashboardPage.getWidgetTitles();
+        const widgetCount = await dashboardPage.getWidgetCount();
+
+        expect(widgetCount).toBe(expectedTitles.length);
+        expect(actualTitles).toEqual(expectedTitles);
+    });
+})
