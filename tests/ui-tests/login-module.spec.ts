@@ -1,5 +1,5 @@
 import { test, expect } from '../../fixtures/hooks-fixture';
-import {wrong_username, wrong_password, invalid_creds_error_message} from '../../data/ui-data/login-module-data.json';
+import { wrong_username, wrong_password, invalid_creds_error_message } from '../../data/ui-data/login-module-data.json';
 
 test.use({storageState: {
     cookies: [],

@@ -3,6 +3,7 @@ import { Locator, Page, expect } from "@playwright/test";
 export class LeftNavPage{
     readonly page: Page;
     readonly pimMenuItem: Locator;
+    readonly myInfoMenuItem: Locator;
     readonly brandLogo: Locator;
     readonly sidebar: Locator;
     readonly toggleButton: Locator;
@@ -13,6 +14,7 @@ export class LeftNavPage{
     constructor(page: Page){
         this.page = page;
         this.pimMenuItem = page.getByRole('link', { name: 'PIM' });
+        this.myInfoMenuItem = page.getByRole('link', { name: 'My Info' });
         this.brandLogo = page.getByRole('link', { name: 'client brand banner' });
         this.sidebar = page.locator('.oxd-sidepanel');
         this.toggleButton = page.locator('.oxd-main-menu-search button.oxd-icon-button');
@@ -76,5 +78,13 @@ export class LeftNavPage{
     async openPimModule(): Promise<void> {
         await expect(this.pimMenuItem).toBeVisible({ timeout: 10000 });
         await this.pimMenuItem.click();
+    }
+
+    /**
+     * Open MyInfo module
+     */
+    async openMyInfoModule(): Promise<void> {
+        await expect(this.myInfoMenuItem).toBeVisible({ timeout: 10000 });
+        await this.myInfoMenuItem.click();
     }
 }
