@@ -16,6 +16,8 @@ jobs:
       API_BASE_URL: ${{ secrets.API_BASE_URL }}    
       API_USER_NAME: ${{ secrets.API_USER_NAME }}
       API_PASSWORD: ${{ secrets.API_PASSWORD }}
+      HELP_URL: ${{ secrets.HELP_TITLE }}
+      HELP_TITLE: ${{ secrets.HELP_TITLE}}
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4

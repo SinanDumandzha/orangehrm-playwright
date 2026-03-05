@@ -7,7 +7,7 @@ type DashboardData = {
     };
 };
 
-test.describe('[DASHBOARD] Verify that Help page open in a new tab when "?" button clicked.', 
+test.describe('[Dashboard] Verify that Help page open in a new tab when "?" button clicked.', 
     { 
         tag: ['@UI', '@UAT'], 
         annotation: {   
@@ -33,7 +33,7 @@ test.describe('[DASHBOARD] Verify that Help page open in a new tab when "?" butt
     }
 );
 
-test.describe('[DASHBOARD] Verify that all widgets at dashboard screen displayed.', 
+test.describe('[Dashboard] Verify that all widgets at dashboard screen displayed.', 
     { 
         tag: ['@UI', '@UAT'], 
         annotation: {   

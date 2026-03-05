@@ -5,6 +5,7 @@ test.describe('[My Info] - Profile Picture Upload', () => {
         gotoUrl,
         leftNavPage,
         myInfoPage,
+        toast
     }) => {
         await leftNavPage.openMyInfoModule();
         await myInfoPage.openProfilePictureSettings();
@@ -19,12 +20,15 @@ test.describe('[My Info] - Profile Picture Upload', () => {
 
         expect(updatedSrc).not.toEqual(defaultSrc);
         expect(updatedSrc).not.toContain('default_photo');
+        await toast.expectSuccess('Successfully Updated');
+        await toast.waitForDisappear();
     });
 
     test('Upload profile picture by clicking + button.', async ({
         gotoUrl,
         leftNavPage,
         myInfoPage,
+        toast
     }) => {
         await leftNavPage.openMyInfoModule();
         await myInfoPage.openProfilePictureSettings();
@@ -39,5 +43,7 @@ test.describe('[My Info] - Profile Picture Upload', () => {
 
         expect(updatedSrc).not.toEqual(defaultSrc);
         expect(updatedSrc).not.toContain('default_photo');
+        await toast.expectSuccess('Successfully Updated');
+        await toast.waitForDisappear();
     });
 });
