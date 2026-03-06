@@ -8,6 +8,11 @@ export class DashboardPage{
     readonly widgets: Locator;
     readonly widgetTitles: Locator;
 
+      readonly footer: Locator;
+  readonly orangeHRMOS: Locator;
+  readonly copyrightText: Locator;
+  readonly orangeHRMLink: Locator;
+
     constructor(page: Page){
         this.page = page;
         this.dashboardTitleText = page.getByRole('heading', { name: 'Dashboard' });
@@ -19,6 +24,10 @@ export class DashboardPage{
         this.widgetTitles = this.widgets.locator(
           '.orangehrm-dashboard-widget-name .oxd-text.oxd-text--p'
         );
+        this.footer = page.locator("oxd-layout-footer");
+        this.orangeHRMOS = page.getByText("OrangeHRM OS");
+        this.orangeHRMLink = page.getByRole("link", { name: "OrangeHRM, Inc" });
+        this.copyrightText = page.getByText("© 2005 - 2026 OrangeHRM, Inc");
     }
 
     async waitForLoaded() {
@@ -32,4 +41,8 @@ export class DashboardPage{
     async getWidgetCount(): Promise<number> {
         return this.widgets.count();
     }
+
+    async getFooterText(): Promise<string> {
+        return this.footer.innerText();
+  }
 }
