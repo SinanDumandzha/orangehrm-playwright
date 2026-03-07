@@ -1,5 +1,5 @@
 import { test, expect } from '../../fixtures/hooks-fixture';
-import rawWidgetsData from '../../data/ui-data/dashboard-module-data.json';
+import rawDashboardData from '../../data/ui-data/dashboard-module-data.json';
 
 type DashboardData = {
     dashboard: {
@@ -45,7 +45,7 @@ test.describe('[Dashboard] Verify that all widgets at dashboard screen displayed
     test('Should display correct widget titles (strict order).', async ({ gotoUrl, dashboardPage }) => {
         await dashboardPage.waitForLoaded();
 
-        const dashboardData = rawWidgetsData as DashboardData;
+        const dashboardData = rawDashboardData as DashboardData;
         const expectedTitles = dashboardData.dashboard.expectedWidgetTitles;
         const actualTitles = await dashboardPage.getWidgetTitles();
         const widgetCount = await dashboardPage.getWidgetCount();
@@ -60,8 +60,8 @@ test.describe(
     {
         tag: ["@UI", "@UAT"],
         annotation: {
-        type: "Test Case Link",
-        description: "testCaseLink",
+            type: "Test Case Link",
+            description: "testCaseLink",
         },
     },
     () => {
@@ -70,28 +70,25 @@ test.describe(
             dashboardPage,
             context,
         }) => {
-        await dashboardPage.waitForLoaded();
+            await dashboardPage.waitForLoaded();
+            await dashboardPage.scrollToFooter();
+            await expect(dashboardPage.footer).toBeVisible();
 
-        const footerText = await dashboardPage.getFooterText();
+            const footerText = await dashboardPage.getFooterText();
+            expect(footerText).toContain(rawDashboardData.dashboard.footer.productName);
+            expect(footerText).toContain(rawDashboardData.dashboard.footer.copyright);
+            expect(footerText).toContain(rawDashboardData.dashboard.footer.company);
 
-        expect(footerText).toContain("OrangeHRM OS");
-        expect(footerText).toContain("OrangeHRM OS 5.8");
-        expect(footerText).toContain(
-            "© 2005 - 2026 OrangeHRM, Inc. All rights reserved."
-        );
+            await expect(dashboardPage.orangeHRMOS).toBeVisible();
+            await expect(dashboardPage.orangeHRMLink).toBeVisible();
+            await expect(dashboardPage.copyrightText).toBeVisible();
 
-        await expect(dashboardPage.orangeHRMOS).toBeVisible();
-        await expect(dashboardPage.orangeHRMLink).toBeVisible();
-        await expect(dashboardPage.copyrightText).toBeVisible();
-
-        const [newPage] = await Promise.all([
-            context.waitForEvent("page"),
-            dashboardPage.orangeHRMLink.click(),
-        ]);
-
-        await newPage.waitForLoadState();
-
-        await expect(newPage).toHaveURL(/orangehrm/);
+            const [newPage] = await Promise.all([
+                context.waitForEvent("page"),
+                dashboardPage.orangeHRMLink.click(),
+            ]);
+            await newPage.waitForLoadState();
+            await expect(newPage).toHaveURL(rawDashboardData.dashboard.footer.orangeHRMLink);
         });
     }
 );

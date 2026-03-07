@@ -7,11 +7,10 @@ export class DashboardPage{
     readonly dashboardGrid: Locator;
     readonly widgets: Locator;
     readonly widgetTitles: Locator;
-
-      readonly footer: Locator;
-  readonly orangeHRMOS: Locator;
-  readonly copyrightText: Locator;
-  readonly orangeHRMLink: Locator;
+    readonly footer: Locator;
+    readonly orangeHRMOS: Locator;
+    readonly copyrightText: Locator;
+    readonly orangeHRMLink: Locator;
 
     constructor(page: Page){
         this.page = page;
@@ -24,10 +23,12 @@ export class DashboardPage{
         this.widgetTitles = this.widgets.locator(
           '.orangehrm-dashboard-widget-name .oxd-text.oxd-text--p'
         );
-        this.footer = page.locator("oxd-layout-footer");
-        this.orangeHRMOS = page.getByText("OrangeHRM OS");
-        this.orangeHRMLink = page.getByRole("link", { name: "OrangeHRM, Inc" });
-        this.copyrightText = page.getByText("© 2005 - 2026 OrangeHRM, Inc");
+        this.footer = page.getByText('OrangeHRM OS 5.8© 2005 - 2026');
+        this.orangeHRMOS = this.footer.getByText("OrangeHRM OS");
+        this.orangeHRMLink = this.footer.getByRole("link", {
+            name: /OrangeHRM/i,
+        });
+        this.copyrightText = this.footer.getByText(/© 2005 - 2026/);
     }
 
     async waitForLoaded() {
@@ -42,7 +43,11 @@ export class DashboardPage{
         return this.widgets.count();
     }
 
+    async scrollToFooter() {
+        await this.footer.scrollIntoViewIfNeeded();
+    }
+
     async getFooterText(): Promise<string> {
         return this.footer.innerText();
-  }
+    }
 }

@@ -8,6 +8,12 @@
       "Employees on Leave Today",
       "Employee Distribution by Sub Unit",
       "Employee Distribution by Location"
-    ]
+    ],
+    "footer": {
+      "productName": "OrangeHRM OS",
+      "copyright": "© 2005 - 2026",
+      "company": "OrangeHRM, Inc",
+      "orangeHRMLink": "https://www.orangehrm.com/"
+    }
   }
 }
