@@ -70,14 +70,15 @@ test.describe(
             dashboardPage,
             context,
         }) => {
+            const { productName, copyright, company, orangeHRMLink } = rawDashboardData.dashboard.footer;
             await dashboardPage.waitForLoaded();
             await dashboardPage.scrollToFooter();
             await expect(dashboardPage.footer).toBeVisible();
 
             const footerText = await dashboardPage.getFooterText();
-            expect(footerText).toContain(rawDashboardData.dashboard.footer.productName);
-            expect(footerText).toContain(rawDashboardData.dashboard.footer.copyright);
-            expect(footerText).toContain(rawDashboardData.dashboard.footer.company);
+            expect(footerText).toContain(productName);
+            expect(footerText).toContain(copyright);
+            expect(footerText).toContain(company);
 
             await expect(dashboardPage.orangeHRMOS).toBeVisible();
             await expect(dashboardPage.orangeHRMLink).toBeVisible();
@@ -88,7 +89,7 @@ test.describe(
                 dashboardPage.orangeHRMLink.click(),
             ]);
             await newPage.waitForLoadState();
-            await expect(newPage).toHaveURL(rawDashboardData.dashboard.footer.orangeHRMLink);
+            await expect(newPage).toHaveURL(orangeHRMLink);
         });
     }
 );

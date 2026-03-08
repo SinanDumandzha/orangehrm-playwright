@@ -1,0 +1,19 @@
+{
+  "userDropdownMenu": {
+    "dropdownMenuItems": ["About", "Support", "Change Password", "Logout"],
+    "aboutDialog": {
+      "heading": "About",
+      "companyLabel": "Company Name:",
+      "versionLabel": "Version:",
+      "activeEmployeesLabel": "Active Employees:",
+      "terminatedEmployeesLabel": "Employees Terminated:",
+      "companyName": "OrangeHRM",
+      "version": "OrangeHRM OS"
+    },
+    "urls": {
+      "support": "dashboard/index",
+      "changePassword": "pim/updatePassword",
+      "logout": "auth/logout"
+    }
+  }
+}
