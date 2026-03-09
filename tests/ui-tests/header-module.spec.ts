@@ -14,3 +14,24 @@ test.describe("[Header] User Dropdown Menu", () => {
         }
     });
 });
+
+test.describe("[Header] User Dropdown - About", () => {
+    test("Verify About dialog content.", async ({ gotoUrl, header }) => {
+        const { heading, version } = headerData.userDropdownMenu.aboutDialog;
+
+        await header.openUserDropdown();
+        await header.openAboutDialog();
+
+        await expect(header.aboutHeading).toBeVisible();
+        await expect(header.aboutDialog).toBeVisible();
+        await expect(header.aboutHeading).toHaveText(heading);
+        await expect(header.companyLabel).toBeVisible();
+        await expect(header.versionLabel).toBeVisible();
+        await expect(header.activeEmployeesLabel).toBeVisible();
+        await expect(header.terminatedEmployeesLabel).toBeVisible();
+        await expect(header.companyNameValue).toBeVisible();
+        await expect(header.versionValue).toContainText(version);
+        
+        await header.closeAboutDialog();
+    });
+});
