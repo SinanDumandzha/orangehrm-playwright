@@ -10,8 +10,13 @@
       "companyName": "OrangeHRM",
       "version": "OrangeHRM OS"
     },
+    "support": {
+      "heading": "Getting Started with OrangeHRM",
+      "title": "Customer Support",
+      "email": "ossupport@orangehrm.com"
+    },
     "urls": {
-      "support": "dashboard/index",
+      "support": "help/support",
       "changePassword": "pim/updatePassword",
       "logout": "auth/logout"
     }

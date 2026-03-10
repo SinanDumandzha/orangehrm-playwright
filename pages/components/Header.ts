@@ -18,6 +18,9 @@ export class Header{
     readonly companyNameValue: Locator;
     readonly versionValue: Locator;
     readonly closeAboutDialogBtn: Locator;
+    readonly supportHeading: Locator;
+    readonly supportTitle: Locator;
+    readonly supportEmail: Locator;
 
     constructor(page: Page){
         this.page = page;
@@ -37,6 +40,9 @@ export class Header{
         this.companyNameValue = page.getByText("OrangeHRM", { exact: true });
         this.versionValue = page.getByRole("dialog").getByText("OrangeHRM OS");
         this.closeAboutDialogBtn = page.getByRole("button", { name: "×" });
+        this.supportHeading = page.getByRole('heading', { name: 'Getting Started with OrangeHRM' });
+        this.supportTitle = page.getByText('Customer Support');
+        this.supportEmail = page.getByRole('link', { name: 'ossupport@orangehrm.com' });
     }
 
     async openUserDropdown() {

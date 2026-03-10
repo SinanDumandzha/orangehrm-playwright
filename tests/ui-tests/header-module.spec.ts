@@ -35,3 +35,13 @@ test.describe("[Header] User Dropdown - About", () => {
         await header.closeAboutDialog();
     });
 });
+
+test("Verify Support link navigation.", async ({ gotoUrl, header, page }) => {
+    await header.openUserDropdown();
+    await header.clickSupport();
+
+    await expect(header.supportHeading).toBeVisible();
+    await expect(header.supportTitle).toBeVisible();
+    await expect(header.supportEmail).toBeVisible();
+    await expect(page).toHaveURL(new RegExp(headerData.userDropdownMenu.urls.support));
+});
