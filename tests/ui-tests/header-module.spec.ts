@@ -1,11 +1,11 @@
 import { test, expect } from '../../fixtures/hooks-fixture';
 import headerData from '../../data/ui-data/header-data.json';
 
+const { dropdownMenuItems, aboutDialog, urls } = headerData.userDropdownMenu;
+
 test.describe("[Header] User Dropdown Menu", () => {
     test("Verify dropdown menu items.", async ({ gotoUrl, header }) => {
         await header.openUserDropdown();
-
-        const { dropdownMenuItems} = headerData.userDropdownMenu;
 
         for (const item of dropdownMenuItems) {
             await expect(
@@ -17,7 +17,7 @@ test.describe("[Header] User Dropdown Menu", () => {
 
 test.describe("[Header] User Dropdown - About", () => {
     test("Verify About dialog content.", async ({ gotoUrl, header }) => {
-        const { heading, version } = headerData.userDropdownMenu.aboutDialog;
+        const { heading, version } = aboutDialog;
 
         await header.openUserDropdown();
         await header.openAboutDialog();
@@ -43,5 +43,23 @@ test("Verify Support link navigation.", async ({ gotoUrl, header, page }) => {
     await expect(header.supportHeading).toBeVisible();
     await expect(header.supportTitle).toBeVisible();
     await expect(header.supportEmail).toBeVisible();
-    await expect(page).toHaveURL(new RegExp(headerData.userDropdownMenu.urls.support));
+    await expect(page).toHaveURL(new RegExp(urls.support));
+});
+
+test("Verify Change Password navigation.", async ({ gotoUrl, header, page }) => {
+    await header.openUserDropdown();
+    await header.clickChangePassword();
+
+    await expect(page).toHaveURL(new RegExp(urls.changePassword));
+    await expect(header.changePasswordHeading).toBeVisible();
+    await expect(header.usernameTitle).toBeVisible();
+    await expect(header.currentPasswordTitle).toBeVisible();
+    await expect(header.currentPasswordTextBox).toBeVisible();
+    await expect(header.passwordTitle).toBeVisible();
+    await expect(header.passwordTextBox).toBeVisible();
+    await expect(header.confirmPasswordTitle).toBeVisible();
+    await expect(header.confirmPasswordTextBox).toBeVisible();
+    await expect(header.requiredText).toBeVisible();
+    await expect(header.changePasswordCancelButton).toBeVisible();
+    await expect(header.changePasswordSaveButton).toBeVisible();
 });

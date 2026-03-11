@@ -21,6 +21,17 @@ export class Header{
     readonly supportHeading: Locator;
     readonly supportTitle: Locator;
     readonly supportEmail: Locator;
+    readonly changePasswordHeading: Locator;
+    readonly usernameTitle: Locator;
+    readonly currentPasswordTitle: Locator;
+    readonly currentPasswordTextBox: Locator;
+    readonly passwordTitle: Locator;
+    readonly passwordTextBox: Locator;
+    readonly confirmPasswordTitle: Locator;
+    readonly confirmPasswordTextBox: Locator;
+    readonly requiredText: Locator;
+    readonly changePasswordCancelButton: Locator;
+    readonly changePasswordSaveButton: Locator;
 
     constructor(page: Page){
         this.page = page;
@@ -43,6 +54,17 @@ export class Header{
         this.supportHeading = page.getByRole('heading', { name: 'Getting Started with OrangeHRM' });
         this.supportTitle = page.getByText('Customer Support');
         this.supportEmail = page.getByRole('link', { name: 'ossupport@orangehrm.com' });
+        this.changePasswordHeading = page.getByRole('heading', { name: 'Update Password' });
+        this.usernameTitle = page.getByText('Username');
+        this.currentPasswordTitle = page.getByText('Current Password');
+        this.currentPasswordTextBox = page.getByRole('textbox').nth(1);
+        this.passwordTitle = page.getByText('Password', { exact: true });
+        this.passwordTextBox = page.getByRole('textbox').nth(2);
+        this.confirmPasswordTitle = page.getByText('Confirm Password');
+        this.confirmPasswordTextBox = page.getByRole('textbox').nth(3);
+        this.requiredText = page.getByText('* Required');
+        this.changePasswordCancelButton = page.getByRole('button', { name: 'Cancel' });
+        this.changePasswordSaveButton =  page.getByRole('button', { name: 'Save' });
     }
 
     async openUserDropdown() {
