@@ -18,7 +18,7 @@
     "urls": {
       "support": "help/support",
       "changePassword": "pim/updatePassword",
-      "logout": "auth/logout"
+      "login": "auth/login"
     }
   }
 }

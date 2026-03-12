@@ -36,7 +36,7 @@ test.describe("[Header] User Dropdown - About", () => {
     });
 });
 
-test("Verify Support link navigation.", async ({ gotoUrl, header, page }) => {
+test("[Header] User Dropdown - Verify Support link navigation.", async ({ gotoUrl, header, page }) => {
     await header.openUserDropdown();
     await header.clickSupport();
 
@@ -46,7 +46,7 @@ test("Verify Support link navigation.", async ({ gotoUrl, header, page }) => {
     await expect(page).toHaveURL(new RegExp(urls.support));
 });
 
-test("Verify Change Password navigation.", async ({ gotoUrl, header, page }) => {
+test("[Header] User Dropdown - Verify Change Password navigation.", async ({ gotoUrl, header, page }) => {
     await header.openUserDropdown();
     await header.clickChangePassword();
 
@@ -62,4 +62,11 @@ test("Verify Change Password navigation.", async ({ gotoUrl, header, page }) => 
     await expect(header.requiredText).toBeVisible();
     await expect(header.changePasswordCancelButton).toBeVisible();
     await expect(header.changePasswordSaveButton).toBeVisible();
+});
+
+test("[Header] User Dropdown - Verify Logout navigation.", async ({ gotoUrl, header, page }) => {
+    await header.openUserDropdown();
+    await header.clickLogout();
+
+    await expect(page).toHaveURL(new RegExp(urls.login));
 });
