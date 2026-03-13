@@ -5,6 +5,7 @@ import { UserPage } from '../pages/UserPage';
 import { LeftNavPage } from '../pages/LeftNavPage';
 import { PimPage } from '../pages/PimPage';
 import { MyInfoPage } from '../pages/MyInfoPage';
+import { BuzzPage } from '../pages/BuzzPage';
 import { Header } from '../pages/components/Header';
 import { Toast } from '../pages/components/Toast';
 
@@ -15,6 +16,7 @@ type PomFixturesType = {
     leftNavPage: LeftNavPage;
     pimPage: PimPage;
     myInfoPage: MyInfoPage;
+    buzzPage: BuzzPage;
     header: Header;
     toast: Toast;
 }
@@ -37,6 +39,9 @@ export const test = baseTest.extend<PomFixturesType>({
     },
     myInfoPage: async ({ page }, use) => {
         await use(new MyInfoPage(page));
+    },
+    buzzPage: async ({ page }, use) => {
+        await use(new BuzzPage(page));
     },
     header: async ({ page }, use) => {
         await use(new Header(page));

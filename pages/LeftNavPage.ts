@@ -4,6 +4,7 @@ export class LeftNavPage{
     readonly page: Page;
     readonly pimMenuItem: Locator;
     readonly myInfoMenuItem: Locator;
+    readonly buzzMenuItem: Locator;
     readonly brandLogo: Locator;
     readonly sidebar: Locator;
     readonly toggleButton: Locator;
@@ -15,6 +16,7 @@ export class LeftNavPage{
         this.page = page;
         this.pimMenuItem = page.getByRole('link', { name: 'PIM' });
         this.myInfoMenuItem = page.getByRole('link', { name: 'My Info' });
+        this.buzzMenuItem = page.getByRole('link', { name: 'Buzz' });
         this.brandLogo = page.getByRole('link', { name: 'client brand banner' });
         this.sidebar = page.locator('.oxd-sidepanel');
         this.toggleButton = page.locator('.oxd-main-menu-search button.oxd-icon-button');
@@ -86,5 +88,13 @@ export class LeftNavPage{
     async openMyInfoModule(): Promise<void> {
         await expect(this.myInfoMenuItem).toBeVisible({ timeout: 10000 });
         await this.myInfoMenuItem.click();
+    }
+
+    /**
+     * Open Buzz module
+     */
+    async openBuzzModule(): Promise<void> {
+        await expect(this.buzzMenuItem).toBeVisible({ timeout: 10000 });
+        await this.buzzMenuItem.click();
     }
 }
