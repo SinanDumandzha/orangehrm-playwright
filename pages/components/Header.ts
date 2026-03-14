@@ -3,6 +3,7 @@ import { Page, Locator } from "@playwright/test";
 export class Header{
     readonly page: Page;
     readonly userDropdownIcon: Locator;
+    readonly usernameText: Locator;
     readonly dropdownMenu: Locator;
     readonly aboutMenuItem: Locator;
     readonly supportMenuItem: Locator;
@@ -36,6 +37,7 @@ export class Header{
     constructor(page: Page){
         this.page = page;
         this.userDropdownIcon = page.locator(".oxd-userdropdown-tab");
+        this.usernameText = page.locator(".oxd-userdropdown-name");
         this.dropdownMenu = page.locator(".oxd-dropdown-menu");
         this.aboutMenuItem = page.getByRole("menuitem", { name: "About" });
         this.supportMenuItem = page.getByRole("menuitem", { name: "Support" });
