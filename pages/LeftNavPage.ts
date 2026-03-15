@@ -94,7 +94,8 @@ export class LeftNavPage{
      * Open Buzz module
      */
     async openBuzzModule(): Promise<void> {
-        await expect(this.buzzMenuItem).toBeVisible({ timeout: 10000 });
-        await this.buzzMenuItem.click();
+        await this.page.getByRole('link', { name: 'Buzz' }).waitFor({ state: 'visible', timeout: 10000 });
+        await this.page.getByRole('link', { name: 'Buzz' }).click();
+        await this.page.getByRole('heading', { name: 'Buzz' }).waitFor({ state: 'visible', timeout: 10000 });
     }
 }

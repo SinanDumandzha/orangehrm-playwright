@@ -4,6 +4,9 @@ test.describe('[Buzz] Module UI Validation', () => {
     test('Verify Buzz page elements.', async ({ gotoUrl, leftNavPage, buzzPage, header }) => {
         await leftNavPage.openBuzzModule();
 
+        await buzzPage.mostRecentPostsTab.waitFor({ state: 'visible' });
+        await buzzPage.mostRecentPostsTab.click();  
+
         await expect(buzzPage.buzzHeading).toBeVisible();
         await expect(buzzPage.buzzNewsFeed).toBeVisible();
         await expect(buzzPage.profilePicture).toBeVisible();
@@ -16,39 +19,42 @@ test.describe('[Buzz] Module UI Validation', () => {
         await expect(buzzPage.mostLikedPostsTab).toBeVisible();
         await expect(buzzPage.mostCommentedPostsTab).toBeVisible();
         await expect(buzzPage.upcomingAnniversaries).toBeVisible();
-
-        await header.openUserDropdown();
-        await header.clickLogout();
     });
 });
 
-test('[Buzz] Verify user can add a text post in Buzz and it appears in feed.', async ({ gotoUrl, leftNavPage, buzzPage, header }) => {
-      await leftNavPage.openBuzzModule();
+test.describe('[Buzz] Text Post', () => {
+    test('Verify user can add a text post in Buzz and it appears in feed.', async ({ 
+        gotoUrl, leftNavPage, buzzPage, header, toast
+    }) => {
+        await leftNavPage.openBuzzModule();
 
-      await buzzPage.mostRecentPostsTab.click();
+        await buzzPage.mostRecentPostsTab.waitFor({ state: 'visible' });
+        await buzzPage.mostRecentPostsTab.click();  
 
-      const postText = `Automation Buzz Post ${Date.now()}`;
-      await buzzPage.createTextPost(postText);
-      await expect(buzzPage.post).toBeVisible();
+        await buzzPage.mostRecentPostsTab.click();
 
-      const newPost = buzzPage.post;
-      await expect(newPost).toContainText(postText);
+        const postText = `Automation Buzz Post ${Date.now()}`;
+        await buzzPage.createTextPost(postText);
+        await expect(buzzPage.post).toBeVisible();
+        const newPost = buzzPage.post;
+        await expect(newPost).toContainText(postText);
 
-      await expect(buzzPage.profilePicture).toBeVisible();
-      await expect(newPost.locator(buzzPage.postLikeIcon).first()).toBeVisible();
-      await expect(newPost.locator(buzzPage.postLikesLabel).first()).toBeVisible();
-      await expect(newPost.locator(buzzPage.postCommentsLabel).first()).toBeVisible();
-      await expect(newPost.locator(buzzPage.postSharesLabel).first()).toBeVisible();
+        await expect(buzzPage.profilePicture).toBeVisible();
+        await expect(newPost.locator(buzzPage.postLikeIcon).first()).toBeVisible();
+        await expect(newPost.locator(buzzPage.postLikesLabel).first()).toBeVisible();
+        await expect(newPost.locator(buzzPage.postCommentsLabel).first()).toBeVisible();
+        await expect(newPost.locator(buzzPage.postSharesLabel).first()).toBeVisible();
 
-      const username = newPost.locator(buzzPage.postUsername).first();
-      await expect(username).toBeVisible();
-      await expect(header.usernameText).toBeVisible();
-      const headerName = await header.usernameText.innerText();
-      const postName = await username.innerText();
-      headerName.split(' ').forEach(name => {
-          expect(postName).toContain(name);
-      });
+        const username = newPost.locator(buzzPage.postUsername).first();
+        await expect(username).toBeVisible();
+        await expect(header.usernameText).toBeVisible();
+        const headerName = await header.usernameText.innerText();
+        const postName = await username.innerText();
+        headerName.split(' ').forEach(name => {
+            expect(postName).toContain(name);
+        });
 
-      await header.openUserDropdown();
-      await header.clickLogout();
+        await toast.expectSuccess('Successfully Saved');
+        await toast.waitForDisappear();
+    });
 });

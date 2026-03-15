@@ -33,7 +33,6 @@ export class MyInfoPage {
     }
 
     async uploadProfilePicture(fileName: string) {
-        console.log(`../data/assets/${fileName}`);
         const filePath = path.resolve(__dirname, `../data/assets/${fileName}`);
         await this.fileInput.setInputFiles(filePath);
     }

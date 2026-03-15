@@ -22,7 +22,6 @@ export class BuzzPage {
     readonly postCommentsLabel: Locator;
     readonly postSharesLabel: Locator;
     readonly postProfileImage: Locator;
-    // readonly postUserName: Locator;
     readonly postTimeStamp: Locator;
 
     constructor(page: Page) {
@@ -47,7 +46,6 @@ export class BuzzPage {
         this.postCommentsLabel = page.getByText('Comments');
         this.postSharesLabel = page.getByText('Shares');
         this.postProfileImage = page.getByRole('img', { name: 'profile picture' });
-        // this.postUserName = page.locator('.oxd-buzz-post-header-text');
         this.postTimeStamp = page.locator('.oxd-buzz-post-time');
         this.postLikeIcon = page.locator('#heart');
         this.postLikesLabel = page.getByText('Likes');
